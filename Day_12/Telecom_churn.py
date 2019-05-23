@@ -33,19 +33,65 @@ import pandas as pd
 tel = pd.read_csv("material/Telecom_churn.csv")
 
 # Predict the count of Churned customer availing both voice mail plan and international plan schema
-churn_int_voice = tel[(tel['churn'] == True) & (tel['voice mail plan'] == 'yes') & (tel['international plan'] == 'yes')]['churn'].count()
+
+churned_users = tel[tel['churn'] == True]         # churned users found out
+non_churned_users = tel[tel['churn'] == False]    # non churned users found out
+
+churn_int_voice = churned_users['churn'][(churned_users['voice mail plan'] == 'yes')
+                         & (churned_users['international plan'] == 'yes')].count()
+
+print("Count of Churned customer availing both voice mail plan and international plan: ",churn_int_voice)
+
 
 # Total charges for international calls made by churned and non-churned customer and visualize it
-tot_int_chrg_churn = tel[tel['churn'] == True]['total intl charge'].sum()
-tot_int_chrg_non_churn = tel[tel['churn'] == False]['total intl charge'].sum()
 
-import matplotlib.pyplot as plt
-plt.pie([tot_int_chrg_churn, tot_int_chrg_non_churn], labels = ['tot_int_chrg_churn','tot_int_chrg_non_churn'],autopct="%2.2f%%")
+tot_int_chrg_churn = churned_users['total intl charge'].sum()
+tot_int_chrg_non_churn = non_churned_users['total intl charge'].sum()
 
-# tel.groupby('churn')['total intl charge'].sum()
+print("Total charges for international calls made by churned users: ",tot_int_chrg_churn)
+print("Total charges for international calls made by non-churned users: ",tot_int_chrg_non_churn)
+
+tot_int_chrg = tel.groupby('churn')['total intl charge'].sum()
+tot_int_chrg.plot.pie(autopct = '%2.2f%%')
+
 
 # Predict the state having highest night call minutes for churned customer
-max_state = tel[tel['total night minutes'] == tel[(tel['churn'] == True)]['total night minutes'].max()]['state']
+
+max_state = churned_users[['state', 'total night minutes']][churned_users['total night minutes'] == churned_users['total night minutes'].max()]
+
+print("State having highest night call minutes for churned customer: ",max_state)
+
 
 # visualize the most popular call type among churned user
-most_pop = tel[(tel['churn'] == True)]
+
+pop_calls = churned_users.iloc[:, 7:19].sum()
+pop_calls.plot.bar()
+
+
+# Which category of customer having maximum account lenght? Predict and print it
+
+churned_acc_len = churned_users['account length'].max()
+non_churned_acc_len = tel['account length'][tel['churn'] == False].max()
+
+
+if churned_acc_len > non_churned_acc_len:
+    print('churned user have the maximum account lenght')
+else:
+    print('regular user have the maximum account lenght')
+
+
+# Predict a relation between the customer and customer care service that 
+# whether churned customer have shown their concern to inform the customer care service about their problem or not
+
+cus_care_ser = churned_users['customer service calls'].sum()
+
+print("Total Cuutomer care calls by churned users: ",cus_care_ser)
+
+
+# In which area code the international plan is most availed?
+
+area_most_int = tel.groupby('area code')['international plan'].value_counts().unstack().sort_values(by = 'yes', ascending = False)
+
+area_most_int.plot.bar()
+
+print("Area code in which international plan is most availed:", area_most_int)

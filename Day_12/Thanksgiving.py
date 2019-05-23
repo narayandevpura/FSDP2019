@@ -49,3 +49,9 @@ Code Challenge
   Hint:
 
 """
+
+import pandas as pd
+
+tg = pd.read_csv('material/thanksgiving.csv', encoding = 'latin1')
+
+tg.groupby('How much total combined money did all members of your HOUSEHOLD earn last year?')['What is typically the main dish at your Thanksgiving dinner?']
