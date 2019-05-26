@@ -44,7 +44,7 @@ try:
     # Creating the dataframe of the json file containing all the url shortener hits
     # pandas.read_json is convert json string to pandas object
     # lines parameter reads the file as json object per line
-    json_df = pd.read_json("usagov_bitly_data.json", lines=True)
+    json_df = pd.read_json("material/usagov_bitly_data.json", lines=True)
 
     # Repalcing some data with some other data
     # pandas.DataFrame.replace(to_replace=None, value=None,) - Replace values given in to_replace with 'value'.

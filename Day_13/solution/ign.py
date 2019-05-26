@@ -38,7 +38,7 @@ Hint:
 
 import pandas as pd
 
-df = pd.read_csv('ign.csv')
+df = pd.read_csv('material/ign.csv')
 
 
 ##### games released for the Xbox One that have a score of more than 7

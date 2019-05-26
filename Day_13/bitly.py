@@ -38,13 +38,46 @@ Hint:
 
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+from collections import Counter
+import seaborn as sns
 
-with open('material/usagov_bitly_data.json') as datafile:
-    data = json.load(datafile)
-dataframe = pd.DataFrame(data)
-df = pd.read_json('material/usagov_bitly_data.json',)
+df = pd.read_json('material/usagov_bitly_data.json', lines = True)
+
+# Replace the 'nan' values with 'Mising' and ' ' values with 'Unknown' keywords
+
+df = df.replace([np.nan, ''],['Missing', 'Unknown'])
+
+# Print top 10 most frequent time-zones from the Dataset i.e. 'tz', with Pandas
+
+df['tz'].value_counts().head(10)
+
+# Print top 10 most frequent time-zones from the Dataset i.e. 'tz', without Pandas
+
+Counter(df['tz']).most_common(10)
+
+# Count the number of occurrence for each time-zone
+
+uniq_tz = df['tz'].value_counts()
+
+# Plot a bar Graph to show the frequency of top 10 time-zones (using Seaborn)
+
+sns.barplot(x = uniq_tz.index[0:11], y = uniq_tz[0:11])
+
+# From field 'a' which contains browser information and separate out browser
+# capability(i.e. the first token in the string eg. Mozilla/5.0)
+
+#splitted_df = df['a'].apply(lambda x: x.split()[0])
+splitted_df = df['a'].str.split(n=1,expand = True)
 
 
+# Count the number of occurrence for separated browser capability field 
+# and plot bar graph for top 5 values (using Seaborn)
 
+uniq_browser = splitted_df[0].value_counts()[0:5]
+sns.barplot(x = uniq_browser.index, y = uniq_browser)
 
+# Add a new Column as 'os' in the dataset, separate users by 'Windows' for 
+# the values in  browser information column i.e. 'a' that contains "Windows" 
+# and "Not Windows" for those who don't
+
+df['os'] = df['a'].apply(lambda x: 'Windows' if 'Windows' in x.replace('(', '').split() else 'Not Windows')

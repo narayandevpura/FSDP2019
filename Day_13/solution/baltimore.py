@@ -64,7 +64,7 @@ import pandas as pd
 
 import numpy as np
 
-df = pd.read_csv('Baltimore_City_Employee_Salaries_FY2014.csv',header=0)
+df = pd.read_csv('material/Baltimore_City_Employee_Salaries_FY2014.csv',header=0)
 
 
 df['AnnualSalary'] = df['AnnualSalary'].astype(str)
