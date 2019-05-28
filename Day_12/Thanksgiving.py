@@ -51,9 +51,24 @@ Code Challenge
 """
 
 import pandas as pd
+import numpy as np
+
+# Read the thanksgiving-2015-poll-data.csv file
 
 tg = pd.read_csv('material/thanksgiving.csv', encoding = 'latin1')
 
-tg.groupby('How much total combined money did all members of your HOUSEHOLD earn last year?')['What is typically the main dish at your Thanksgiving dinner?']
+# Discover regional and income-based patterns in what Americans eat for Thanksgiving dinner
+    
+# Incone-based   
+eat_inc = tg.groupby('How much total combined money did all members of your HOUSEHOLD earn last year?')['What is typically the main dish at your Thanksgiving dinner?'].value_counts().unstack()
 
+# Region-based
+eat_reg = tg.groupby('US Region')['What is typically the main dish at your Thanksgiving dinner?'].value_counts().unstack()
 
+# Convert the column name to single word names
+
+tg.columns = [i for i in range(1, 66)]
+
+#  Using the apply method to Gender column to convert Male & Female
+
+tg[63].apply(lambda x: x[i-1] if x[i] ==  np.nan else x[i] for i in range(len(tg[63])))
