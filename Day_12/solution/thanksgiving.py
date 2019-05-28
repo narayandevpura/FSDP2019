@@ -57,7 +57,7 @@ from contextlib import suppress
 # Loading the datasets and starting the required preprocessing
 with suppress((FileNotFoundError, TypeError, AttributeError, ValueError)):
     # Encoding of the dataset is in Windows 1252 so it should be specified while loading it
-    datath_df = pd.read_csv("thanksgiving.csv", encoding="Windows 1252")
+    datath_df = pd.read_csv("material/thanksgiving.csv", encoding="Windows 1252")
 
     # Fetching the columns name for further reference
     columns_name = list(datath_df.columns)
