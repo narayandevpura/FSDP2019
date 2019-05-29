@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 # Importing the dataset
-dataset = pd.read_csv('Salary_Classification.csv')
+dataset = pd.read_csv('Day_16/material/Salary_Classification.csv')
 temp = dataset.values
 features = dataset.iloc[:, :-1].values
 labels = dataset.iloc[:, -1].values
@@ -15,7 +15,7 @@ labels = dataset.iloc[:, -1].values
 dataset.isnull().any(axis=0)
 
 #check data types for each column
-print dataset.dtypes
+# print dataset.dtypes
 
 # Encoding categorical data
 from sklearn.preprocessing import LabelEncoder
@@ -99,7 +99,7 @@ print('Mean Absolute Error:', metrics.mean_absolute_error(labels_test, Pred))
 print('Mean Squared Error:', metrics.mean_squared_error(labels_test, Pred))  
 print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(labels_test, Pred)))  
 
-print np.mean(labels)
+#print np.mean(labels)
 """
 You can see that the value of root mean squared error is 4379.8, which is lower than 10% of the mean value of the salaries (760038x10/100 = 7600). This means that our algorithm was not very accurate but can still make reasonably good predictions.
 

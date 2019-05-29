@@ -12,7 +12,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Importing the dataset
-dataset = pd.read_csv('Claims_Paid.csv')
+dataset = pd.read_csv('material/Claims_Paid.csv')
 features = dataset.iloc[:, 0:1].values
 labels = dataset.iloc[:, 1].values
 
@@ -28,7 +28,7 @@ lin_reg_1.fit(features, labels)
 
 
 print "Predicting result with Linear Regression",
-print lin_reg_1.predict(1981)
+print (lin_reg_1.predict(1981))
 
 # Visualising the Linear Regression results
 plt.scatter(features, labels, color = 'red')
