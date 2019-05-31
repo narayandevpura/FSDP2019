@@ -76,39 +76,58 @@ import pandas as pd
 
 full_df = pd.read_csv('material/mushrooms.csv')
 
+# required df
 df = full_df.iloc[:,[0,5,21,22]]
 df.isnull().any(axis = 0)
 
-from sklearn.preprocessing import LabelEncoder
-LE = LabelEncoder()
-df.iloc[:,0] = LE.fit_transform(df.iloc[:,0])
-df.iloc[:,1] = LE.fit_transform(df.iloc[:,1])
-df.iloc[:,2] = LE.fit_transform(df.iloc[:,2])
-df.iloc[:,3] = LE.fit_transform(df.iloc[:,3])
-
+# features and labels
 X = df.iloc[:, 1:].values
-Y = df.iloc[:, 0:1].values
+y = df.iloc[:, 0:1].values
 
+# Applying Label Encoding
+from sklearn.preprocessing import LabelEncoder
+cols = [0, 1, 2]
+lab_enc = []
+
+for i in range(len(cols)):
+    label_encoder = LabelEncoder()
+    lab_enc.append(label_encoder)
+
+for col, LE in zip(cols,lab_enc):
+    X[:,col] = LE.fit_transform(X[:,col])
+
+LE = LabelEncoder()
+y = LE.fit_transform(y)
+
+
+# train_test_split
 from sklearn.model_selection import train_test_split
-X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.3, random_state = 101)
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size = 0.3, random_state = 101)
 
 
+# Applying LogisticRegression
 from sklearn.linear_model import LogisticRegression
 log = LogisticRegression()
-log.fit(X_train, Y_train)
-Y_pred = log.predict(X_test)
-print("Accuracy of Logistic Model: ",log.score(X_test, Y_test) * 100)
+log.fit(X_train, y_train)
+y_pred = log.predict(X_test)
+print("Accuracy of Logistic Model: ",log.score(X_test, y_test) * 100)
 
+
+# Finding confusion_matrix
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(Y_test,Y_pred)
+cm = confusion_matrix(y_test,y_pred)
 print("Confusion matrix of LR Model: ", cm)
 
+
+# Applying KNeighborsClassifier
 from sklearn.neighbors import KNeighborsClassifier
 knn = KNeighborsClassifier()
-knn.fit(X_train, Y_train)
-Y_preds = knn.predict(X_test)
-print("Accuacy of KNN Model: ", knn.score(X_test, Y_test) * 100)
+knn.fit(X_train, y_train)
+y_preds = knn.predict(X_test)
+print("Accuacy of KNN Model: ", knn.score(X_test, y_test) * 100)
 
+
+# Finding confusion_matrix
 from sklearn.metrics import confusion_matrix
-cm = confusion_matrix(Y_test,Y_preds)
+cm = confusion_matrix(y_test,y_preds)
 print("Confusion matrix of KNN Model: ", cm)

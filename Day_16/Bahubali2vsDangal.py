@@ -29,6 +29,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+# read data
 bd = pd.read_csv('material/Bahubali2_vs_Dangal.csv')
 
 # Plotting data for bahubali2 movie
@@ -45,13 +46,16 @@ plt.xlabel('Days')
 plt.ylabel('Money Collected')  
 plt.show()
 
+# features and labels
 features = bd.iloc[:,0:1]
 labels = bd.iloc[:,1:3]
 
+# Applying LinearRegression
 from sklearn.linear_model import LinearRegression
 regressor = LinearRegression()
 regressor.fit(features,labels)
 
+# prediction
 day = 10
 day = np.array(day).reshape(1,-1)
 pred = regressor.predict(day)

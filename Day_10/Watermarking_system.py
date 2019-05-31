@@ -16,6 +16,7 @@ across the background so that no one can simply steal your graphics off your sit
 Make a program that will add this watermark to the picture.
 
 """
+"""
 from PIL import Image
 from PIL import ImageDraw
 
@@ -51,5 +52,27 @@ drwa = ImageDraw.Draw(new)
 
 drwa.text((0,0), text='who am i',size = (45), color = (255,0,0))
 
+"""
 
 
+from PIL import Image
+image = Image.open('apple.png') 
+print(image.size, image.format)
+
+
+from PIL import Image, ImageDraw, ImageFont
+
+image = Image.open('apple.png')
+width, height = image.size
+
+
+tag = Image.open('tag.png')
+t_width, t_height = tag.size
+tag = tag.rotate(45)
+
+x = width - t_width
+y = height - t_height
+
+image.paste(tag, (x,y))
+
+image.save('appless.png')

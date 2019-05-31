@@ -27,14 +27,17 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# read data
 blue = pd.read_csv("material/bluegills.Csv")
 
+# checking data
 blue.isnull().any(axis = 0)
 
+# features and labels
 features = blue.iloc[:,0:1].values
 labels = blue.iloc[:,1:].values
 
-
+# train_test_split
 from sklearn.model_selection import train_test_split  
 features_train, features_test, labels_train, labels_test = train_test_split(features, labels, test_size=0.2, random_state=0)  
 
@@ -43,9 +46,7 @@ features_train, features_test, labels_train, labels_test = train_test_split(feat
 from sklearn.linear_model import LinearRegression
 LR = LinearRegression()
 LR.fit(features_train, labels_train)
-
 pred1 = LR.predict(features_test)
-
 LR_score = LR.score(features_test, labels_test)
 
 

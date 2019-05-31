@@ -20,11 +20,11 @@ from PIL import Image
 images = []
 names=['apple.png','crown.jfif','egg.jfif','food.jfif','happy.jfif','what.jfif']
 for n in names:
-    frame = Image.open(n)
+    frame = Image.open('images/'+n)
     images.append(frame)
 
 # Save the frames as an animated GIF
-images[0].save('newgif.gif',
+images[0].save('result/newgif.gif',
                save_all=True,
                append_images=images[1:],
                duration=200,

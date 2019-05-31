@@ -22,10 +22,11 @@ Code Challenges:
 import pandas as pd
 import numpy as np
 
+# read data
 un = pd.read_csv('material/University_data.csv')
-
 un.iloc[:,0].unique()
 
+# features and labels 
 features = un.iloc[:, :-1].values
 labels = un.iloc[:, -1].values
 
@@ -69,7 +70,7 @@ x = [0,1,0,0,313,3,4,8.6,0]
 x = np.array(x)
 regressor.predict(x.reshape(1, -1))
 
-
+# Label and OneHot Encoding
 le = labelencoder.transform(['Beaver'])
 ohe = onehotencoder.transform(le.reshape(1,1)).toarray()
 x = [ohe[0][1],ohe[0][2],ohe[0][3],ohe[0][4],313,3,4,8.6,0]

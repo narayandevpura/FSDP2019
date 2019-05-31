@@ -32,8 +32,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# read data
 iq = pd.read_csv('material/iq_size.csv')
 
+# features and labels
 features = iq.iloc[:,-3:]
 labels = iq.iloc[:,:1]
 
@@ -43,10 +45,10 @@ labels = iq.iloc[:,:1]
 #plt.scatter(features.iloc[:,2], labels)
 #plt.plot(features.iloc[:,0], LR.predict(labels))
 
+# Applying LinearRegression
 from sklearn.linear_model import LinearRegression
 LR = LinearRegression()
 LR.fit(features, labels)
-
 LR.predict(np.array([90, 70, 150]).reshape(1,-1))
 
 # Plotting graph
@@ -62,6 +64,7 @@ plt.plot(features.iloc[:,2], LR.predict(features))
 plt.show()
 
 
+# Applying OLS 
 import statsmodels.api as sms
 
 features = sms.add_constant(features)

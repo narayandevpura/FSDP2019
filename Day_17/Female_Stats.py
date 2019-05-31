@@ -37,8 +37,10 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# read data
 fem = pd.read_csv("material/Female_Stats.Csv")
 
+# features and labels
 features = fem.iloc[:,1:].values
 labels = fem.iloc[:,0].values
 

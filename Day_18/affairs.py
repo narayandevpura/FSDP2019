@@ -66,26 +66,30 @@ import pandas as pd
 
 af = pd.read_csv("material/affairs.csv")
 
+# features and labels
 X = af.iloc[:,:-1]
 Y = af.iloc[:,-1]
 
 # Performing dummy variables for two columns
 X = pd.get_dummies(data = X, columns=['occupation', 'occupation_husb'], drop_first = True)
 
+# train_test_split
 from sklearn.model_selection import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.33, random_state = 0)
 
+# Applying LogisticRegression
 from sklearn.linear_model import LogisticRegression
 log = LogisticRegression()
 log.fit(X_train, Y_train)
 pred = log.predict(X_test)
 
-# Confusing matrix
 
+# Confusing matrix
 from sklearn.metrics import confusion_matrix
 c = confusion_matrix(Y_test, pred)
 print(c)
 print("Accuracy of the model: ",log.score(X_test, Y_test))
+
 
 # Prediction for new women
 woman = [3,25,3,1,5,16,0,0,1,0,0,1,0,0,0,0]

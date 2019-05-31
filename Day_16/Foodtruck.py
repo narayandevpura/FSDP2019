@@ -42,8 +42,10 @@ Code Challenge: Simple Linear Regression
 import numpy as np
 import pandas as pd
 
+# read data
 food = pd.read_csv('material/Foodtruck.csv')
 
+# features and labels
 features = food.iloc[:,0:1].values
 labels = food.iloc[:,1:].values
 
@@ -52,6 +54,7 @@ labels = food.iloc[:,1:].values
 # features_train, features_test, labels_train, labels_test = train_test_split(features,labels, test_size = 0.2, random_state = 0)
 
 
+# Appliyng LinearRegression
 from sklearn.linear_model import LinearRegression  
 regressor = LinearRegression()  
 regressor.fit(features, labels) 

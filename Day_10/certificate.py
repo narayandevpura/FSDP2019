@@ -36,7 +36,7 @@ with open('students.csv', 'r') as stu:
             year = row[3] + 'th year'
         _class = year + '  ' + branch  
         
-        img = Image.open("c_temp.jpg")
+        img = Image.open("images/c_temp.jpg")
         draw = ImageDraw.Draw(img)
         selectFont1 = ImageFont.truetype(font = "georgiab.ttf", size = 28, layout_engine = None)
         selectFont2 = ImageFont.truetype(font = "georgiab.ttf", size = 24, layout_engine = None)
@@ -53,4 +53,4 @@ with open('students.csv', 'r') as stu:
         else:
             draw.text( (595,398), _class, (20,20,20), font = selectFont2)
             
-        img.save( name.split()[0]+name.split()[1][0]+'.jpg', "JPEG", resolution=100.0)
+        img.save('result/'+name.split()[0]+name.split()[1][0]+'.jpg', "JPEG", resolution=100.0)
