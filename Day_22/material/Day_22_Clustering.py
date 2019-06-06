@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset (Bivariate Data Set with 3 Clusters)
-dataset = pd.read_csv('xclara.csv')
+dataset = pd.read_csv('material/xclara.csv')
 features = dataset.iloc[:, [0, 1]].values
 
 #Scatter all these data points on the matplotlib

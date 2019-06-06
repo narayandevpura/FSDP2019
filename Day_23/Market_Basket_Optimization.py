@@ -12,13 +12,14 @@ Q2. In today's demo sesssion, we did not handle the null values before fitting t
 Also draw the bar chart of top 10 edibles.
 
 """
-
-# Importing the libraries
 import pandas as pd
 from material.apyori import apriori
+import matplotlib.pyplot as plt
 
 # Data Preprocessing
 df = pd.read_csv('material/Market_Basket_Optimisation.csv', header = None)
+
+# Importing the libraries
 
 
 
@@ -56,26 +57,17 @@ for item in results:
     print("Lift: " + str(item[2][0][3]))
     print("=====================================")
 
+flat_list = []
+for sublist in transactions:
+    for item in sublist:
+        flat_list.append(item)
 
+top_10_df = pd.DataFrame(flat_list)
+top_10 = top_10_df[0].value_counts().head(10)
 
+names = top_10.index.tolist()    
+count = top_10.values.tolist()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+plt.bar(names, count, align = 'center', alpha = 0.5)
+plt.xticks(rotation =90)
+plt.show()

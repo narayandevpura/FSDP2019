@@ -11,7 +11,7 @@ iris = load_iris()
 from sklearn.cluster import DBSCAN
 dbscan = DBSCAN()
 
-print dbscan
+print (dbscan)
 """
 DBSCAN(eps=0.5, metric='euclidean', min_samples=5,
   random_state=111)

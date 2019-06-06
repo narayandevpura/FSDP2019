@@ -21,7 +21,6 @@ and the mean percentage of time a driver was >5 mph over the speed limit (speedi
 """
 
 # Importing the libraries
-import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -48,13 +47,15 @@ plt.ylabel('WCSS')
 plt.show()
 
 # Fitting K-Means to the dataset
-kmeans = KMeans(n_clusters = 2, init = 'k-means++', random_state = 0)
+kmeans = KMeans(n_clusters = 4, init = 'k-means++', random_state = 0)
 pred_cluster = kmeans.fit_predict(features)
 
 # Visualising the clusters
 #plt.scatter(features[:,0][y_kmeans == 0], features[:,1][y_kmeans == 0], s = 100, c = 'red', label = 'Cluster 1')
 plt.scatter(features[pred_cluster == 0, 0], features[pred_cluster == 0, 1], c = 'blue', label = 'Cluster 1')
 plt.scatter(features[pred_cluster == 1, 0], features[pred_cluster == 1, 1], c = 'red', label = 'Cluster 2')
+plt.scatter(features[pred_cluster == 2, 0], features[pred_cluster == 2, 1], c = 'green', label = 'Cluster 2')
+plt.scatter(features[pred_cluster == 3, 0], features[pred_cluster == 3, 1], c = 'pink', label = 'Cluster 2')
 plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], c = 'yellow', label = 'Centroids')
 plt.title('Clusters of datapoints')
 plt.xlabel('X Cordindates')
